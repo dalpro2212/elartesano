@@ -7,13 +7,13 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-image: url('IMAGEN-ARTESANO.jpg'); /* Ruta de la imagen de fondo */
-            background-size: cover; /* Ajusta la imagen para cubrir todo el fondo */
-            background-position: center; /* Centra la imagen */
-            background-repeat: no-repeat; /* Evita que la imagen se repita */
+            background-image: url('IMAGEN-ARTESANO.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             margin: 0;
             padding: 0;
-            color: white; /* Cambia el color del texto si es necesario */
+            color: white;
         }
         header {
             background: rgba(53, 66, 74, 0.8);
@@ -24,8 +24,8 @@
             width: 80%;
             margin: auto;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para el contenedor */
-            border-radius: 8px; /* Bordes redondeados */
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
         }
         footer {
             text-align: center;
@@ -36,26 +36,56 @@
             width: 100%;
         }
         .media {
-            text-align: center; 
+            text-align: center;
         }
         .media img, .media video {
             display: inline-block;
-            max-width: 300px; /* Ajusta el tamaño de las imágenes y videos */
+            max-width: 300px;
             margin: 10px;
             vertical-align: top;
+            cursor: pointer;
         }
         .videos {
             text-align: center;
-            margin-top: 20px; /* Ajusta el margen superior del segundo video */
+            margin-top: 20px;
         }
         .video-with-images {
             display: flex;
             justify-content: space-between;
-            align-items: center; /* Alinea verticalmente en el centro */
+            align-items: center;
             margin-top: 20px;
         }
         .video-with-images img, .video-with-images video {
-            width: 30%; /* Ajusta el ancho de las imágenes y video */
+            width: 30%;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        .modal-content:hover {
+            transform: none;
+            box-shadow: none;
+        }
+        .modal-close {
+            position: absolute;
+            top: 50px;
+            right: 100px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -89,32 +119,62 @@
     <h2>¿QUÉ ES EL ARTESANO FEST?</h2>
     <p>El Artesano Fest es un evento que se celebra cada dos meses, donde diferentes bandas se presentan para compartir su talento y ofrecer una experiencia única a los asistentes. Es un espacio para disfrutar, celebrar y fomentar el arte y la cultura en ICA.</p>
 
-    <!-- Sección de imágenes y video -->
     <h2>MÁS SOBRE ESTE EVENTO</h2>
     <div class="media">
-        <img src="IMAGENES-ARTESANO1.jpeg" alt="Foto 1 del Artesano Fest">
-        <img src="IMAGENES-ARTESANO2.jpeg" alt="Foto 2 del Artesano Fest">
+        <img src="IMAGENES-ARTESANO1.webp" alt="Foto 1 del Artesano Fest" class="clickable-image">
+        <img src="IMAGENES-ARTESANO2.jpeg" alt="Foto 2 del Artesano Fest" class="clickable-image">
         <video width="240" controls>
             <source src="VIDEO-ARTESANO1.mp4" type="video/mp4">
             Tu navegador no soporta la reproducción de videos.
         </video>
     </div>
 
-    <!-- Sección del segundo video con imágenes alineadas a los lados del video -->
     <div class="video-with-images">
-        <img src="IMAGENES-ARTESANO3.jpeg" alt="Imagen izquierda">
-        <video controls>
+        <img src="IMAGENES-ARTESANO3.jpeg" alt="Imagen izquierda" class="clickable-image">
+        <video width="270" controls>
             <source src="VIDEO-ARTESANO2.mp4" type="video/mp4">
             Tu navegador no soporta la reproducción de videos.
         </video>
-        <img src="IMAGENES-ARTESANO4.jpeg" alt="Imagen derecha">
+        <img src="IMAGENES-ARTESANO4.jpeg" alt="Imagen derecha" class="clickable-image">
     </div>
 
+    <p>Organizador del evento: <a href="https://www.instagram.com/boomer_nygma?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #ffcc00;">@nombre_organizador</a></p>
+    <p>Desarrollador de la página: <a href="https://www.instagram.com/daniolazaval2212/?hl=en" target="_blank" style="color: #ffffff;">@daniolazaval2212</a></p>
+
+</div>
+
+<div id="modal" class="modal">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="modal-image">
 </div>
 
 <footer>
     <p>&copy; 2024 EN MI MUSICA IQUEÑA. Todos los derechos reservados.</p>
 </footer>
+
+<script>
+    var modal = document.getElementById("modal");
+    var modalImg = document.getElementById("modal-image");
+    var closeModal = document.getElementsByClassName("modal-close")[0];
+
+    document.querySelectorAll(".clickable-image").forEach(function(image) {
+        image.onclick = function(event) {
+            event.preventDefault();
+            modal.style.display = "block";
+            modalImg.src = this.src;
+        }
+    });
+
+    closeModal.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 
 </body>
 </html>
